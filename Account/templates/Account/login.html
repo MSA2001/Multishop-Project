@@ -8,8 +8,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <span class="breadcrumb-item active">Contact</span>
+                    <a class="breadcrumb-item text-dark" href="{% url 'shop:home' %}">Home</a>
+                    <span class="breadcrumb-item active">Login</span>
                 </nav>
             </div>
         </div>
@@ -24,15 +24,14 @@
             <div class=" mb-5 contact-us" style="">
                 <div class="contact-form bg-light p-30">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form method="post">
+                        {% csrf_token %}
                         <div class="control-group">
-                            <input type="text" class="form-control" name="phone" id="name" placeholder="phone number"
-                                required="required" data-validation-required-message="Please enter your phone number" />
+                           {{ form.phone }}
                             <p class="help-block text-danger"></p>
-                        </div>
+                        </div> <br>
                         <div class="control-group">
-                            <input type="password" name="password" class="form-control" id="subject" placeholder="password"
-                                required="required" data-validation-required-message="Please enter your password" />
+                           {{ form.password }}
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
