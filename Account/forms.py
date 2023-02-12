@@ -63,3 +63,4 @@ class UserRegisterForm(forms.Form):
 class CheckOtpForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'OTP Code'}),
                            validators=[validators.MaxLengthValidator(4)])
+
