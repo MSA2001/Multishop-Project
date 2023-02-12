@@ -45,12 +45,12 @@ class UserChangeForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
-    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}),
-                            )
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email or Phone number'}),
+                               )
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
 
-class UserRegisterForm(forms.Form):
+class OtpLoginForm(forms.Form):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}),
                             validators=[validators.MaxLengthValidator(11)])
 

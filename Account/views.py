@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from .forms import UserLoginForm, UserRegisterForm, CheckOtpForm
+from .forms import UserLoginForm, OtpLoginForm, CheckOtpForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 import ghasedakpack
@@ -27,7 +27,7 @@ class UserLoginView(View):
             cd = form.cleaned_data
             user = authenticate(request, username=cd['phone'], password=cd['password'])
             if user is not None:
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 messages.success(request, 'You logged in successfully', 'success')
                 return redirect('shop:home')
             else:
@@ -37,7 +37,7 @@ class UserLoginView(View):
 
 
 class OtoLoginView(View):
-    form_class = UserRegisterForm
+    form_class = OtpLoginForm
 
     def get(self, request):
         form = self.form_class()
