@@ -44,14 +44,9 @@ class UserChangeForm(forms.ModelForm):
         fields = ('phone', 'password', 'is_active', 'is_admin')
 
 
-def start_with_0(value):
-    if value[0] != '0':
-        return ValidationError('Number must start with 0')
-
-
 class UserLoginForm(forms.Form):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}),
-                            validators=[start_with_0])
+                            )
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
 
