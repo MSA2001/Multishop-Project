@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from .forms import UserLoginForm, OtpLoginForm, CheckOtpForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import ghasedakpack
 from django.views import View
@@ -81,3 +81,14 @@ class CheckOtpView(View):
                 return redirect('Account:check_otp')
 
         return render(request, 'Account/otp.html', {'form': form})
+
+
+class UserLogoutView(View):
+
+    def get(self, request):
+
+        logout(request)
+        messages.success(request, 'You logged out successfully', 'success')
+        return redirect('shop:home')
+
+
