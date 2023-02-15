@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import cart.apps
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Shop.apps.ShopConfig',
-    'Account.apps.AccountConfig'
+    'Account.apps.AccountConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
