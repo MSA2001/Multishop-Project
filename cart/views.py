@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 # Create your views here.
+from Shop.models import Product
 
 
 class CartDetailView(View):
@@ -11,6 +12,8 @@ class CartDetailView(View):
 
 class CartAddView(View):
 
-    def post(self, request):
-        print('product added')
+    def post(self, request, pk):
+        size, color, quantity = request.POST.get('size'), request.POST.get('color'), request.POST.get('quantity')
+        product = get_object_or_404(Product, id=pk)
+        print(size, color, quantity)
         return redirect('cart:cart_detail')
