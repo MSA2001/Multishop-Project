@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Address
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core import validators
@@ -59,3 +59,8 @@ class CheckOtpForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'OTP Code'}),
                            validators=[validators.MaxLengthValidator(4)])
 
+
+class AddressCreationForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        exclude = ('user',)

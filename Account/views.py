@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from .forms import UserLoginForm, OtpLoginForm, CheckOtpForm
+from .forms import UserLoginForm, OtpLoginForm, CheckOtpForm, AddressCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import ghasedakpack
@@ -10,6 +10,7 @@ from django.utils.crypto import get_random_string
 from uuid import uuid4
 
 SMS = ghasedakpack.Ghasedak("c39a4004d4c5076df9ec541aa7cfd738c84752841ae2789be435fa4823bbbec9")
+
 
 # Create your views here.
 
@@ -46,7 +47,7 @@ class OtoLoginView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            randcode = randint(1000,9999)
+            randcode = randint(1000, 9999)
             cd = form.cleaned_data
             SMS.verification({'receptor': cd["phone"], 'type': '1', 'template': 'Multishop', 'param1': randcode})
             token = str(uuid4())
@@ -83,12 +84,22 @@ class CheckOtpView(View):
         return render(request, 'Account/otp.html', {'form': form})
 
 
-class UserLogoutView(View):
+class AddAddressView(View):
+    form_class = AddressCreationForm
 
     def get(self, request):
+        form = self.form_class()
+        return render(request, 'Account/add_address.html', {'form': form})
 
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+        return render(request, 'Account/add_address.html', {'form': form})
+
+
+class UserLogoutView(View):
+    def get(self, request):
         logout(request)
         messages.success(request, 'You logged out successfully', 'success')
         return redirect('shop:home')
-
-
