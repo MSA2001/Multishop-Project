@@ -41,6 +41,9 @@ class Cart:
         total = sum(int(item['price']) * int(item['quantity']) for item in cart)
         return total
 
+    def remove_cart(self):
+        del self.session[CART_SESSION_ID]
+
     def delete(self, id):
         if id in self.cart:
             del self.cart[id]

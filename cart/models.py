@@ -18,13 +18,25 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
-    size = models.CharField(max_length=3)
-    color = models.CharField(max_length=12)
+    size = models.CharField(max_length=3, null=True, blank=True)
+    color = models.CharField(max_length=12, null=True, blank=True)
     quantity = models.SmallIntegerField()
     price = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return self.order.user.phone
+
+    def get_cost(self):
+        return self.price * self.quantity
+
+
+class DiscountCode(models.Model):
+    name = models.CharField(max_length=10, unique=True)
+    discount = models.SmallIntegerField(default=0)
+    quantity = models.SmallIntegerField(default=1)
+
+    def __str__(self):
+        return self.name
 
 
 
