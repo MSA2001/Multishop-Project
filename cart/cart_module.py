@@ -38,10 +38,8 @@ class Cart:
 
     def total(self):
         cart = self.cart.values()
-        total = sum(item['total'] for item in cart)
+        total = sum(int(item['price']) * int(item['quantity']) for item in cart)
         return total
-
-
 
     def delete(self, id):
         if id in self.cart:
