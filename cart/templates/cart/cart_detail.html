@@ -6,7 +6,7 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'shop:home' %}">Home</a>
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
                     <span class="breadcrumb-item active">Shopping Cart</span>
                 </nav>
@@ -34,23 +34,25 @@
                     </tr>
                     </thead>
                     <tbody class="align-middle">
+                        {% for item in cart %}
+                            <tr>
+                                <td class="align-middle"><img src="{{ item.product.image.url }}" alt=""
+                                                              style="width: 50px;"></td>
+                                <td class="align-middle">{{ item.product.title }}</td>
+                                <td class="align-middle">{{ item.color }}</td>
+                                <td class="align-middle">{{ item.size }}</td>
+                                <td class="align-middle">{{ item.price }}</td>
+                                <td class="align-middle">
+                                    {{ item.quantity }}
+                                </td>
+                                <td class="align-middle">{{ item.total }}</td>
+                                <td class="align-middle">
+                                    <a href="{% url 'cart:cart_delete' item.unique_id %}" class="btn btn-sm btn-danger"><i
+                                            class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-                    {% for item in cart %}
-                        <tr>
-                            <td class="align-middle"><img src="{{ item.product.image.url }}" alt="" style="width: 50px;"></td>
-                            <td class="align-middle">{{ item.product.title }}</td>
-                            <td class="align-middle">{{ item.color }}</td>
-                            <td class="align-middle">{{ item.size }}</td>
-                            <td class="align-middle">{{ item.price }}</td>
-                            <td class="align-middle">
-                                {{ item.quantity }}
-                            </td>
-                            <td class="align-middle">{{ item.total }}</td>
-                            <td class="align-middle">
-                                <a href="{% url 'cart:cart_delete' item.unique_id %}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
 
                     </tbody>
                 </table>
@@ -66,7 +68,8 @@
                             <h5>Total</h5>
                             <h5>${{ cart.total }}</h5>
                         </div>
-                        <a href="{% url 'cart:order_create' %}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout
+                        <a href="{% url 'cart:order_create' %}"
+                           class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout
                         </a>
                     </div>
                 </div>
