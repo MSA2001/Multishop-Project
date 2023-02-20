@@ -29,7 +29,7 @@ class Color(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=50)
-    category = models.ManyToManyField(Category, related_name='products')
+    category = models.ManyToManyField(Category, related_name='products', null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
     discount = models.SmallIntegerField(null=True, blank=True)

@@ -9,7 +9,8 @@ from Shop.models import Product, Contact
 
 
 def home(request):
-    return render(request, 'Shop/index.html')
+    products = Product.objects.all().order_by('?')
+    return render(request, 'Shop/index.html', {'products': products})
 
 
 class ProductDetailView(DetailView):
@@ -34,7 +35,6 @@ class ContactView(View):
         else:
             messages.error(request, 'failed to sent a message, try again.')
             return redirect('shop:contact_us')
-
         return render(request, 'Shop/contact.html', {'form': form})
 
 
