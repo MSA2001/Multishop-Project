@@ -50,3 +50,11 @@ class CategoryDetailView(View):
     def get(self, request, pk):
         products = Product.objects.filter(category=pk)
         return render(request, 'Shop/shop.html', {'products': products})
+
+
+class SearchView(View):
+
+    def get(self, request):
+        q = request.GET.get('q')
+        products = Product.objects.filter(title__icontains=q)
+        return render(request, 'Shop/shop.html', {'products': products})
