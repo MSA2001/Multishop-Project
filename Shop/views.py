@@ -43,3 +43,10 @@ class ShopView(View):
     def get(self, request):
         products = Product.objects.all()
         return render(request, 'Shop/shop.html', {'products': products})
+
+
+class CategoryDetailView(View):
+
+    def get(self, request, pk):
+        products = Product.objects.filter(category=pk)
+        return render(request, 'Shop/shop.html', {'products': products})

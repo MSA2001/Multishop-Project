@@ -6,8 +6,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'shop:home' %}">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{% url 'shop:shop' %}">Shop</a>
                     <span class="breadcrumb-item active">Shop List</span>
                 </nav>
             </div>
@@ -26,6 +26,7 @@
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
                 <div class="row pb-3">
+                {% if products %}
                     {% for product in products %}
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
@@ -42,7 +43,10 @@
                         </div>
                     </div>
                     {% endfor %}
+                {% else %}
                 </div>
+                <div class="alert alert-danger">No product found.</div>
+                {% endif %}
             </div>
             <!-- Shop Product End -->
         </div>
