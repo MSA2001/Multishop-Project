@@ -3,6 +3,16 @@ from django.db import models
 # Create your models here.
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "categories"
+
+    def __str__(self):
+        return self.name
+
+
 class Size(models.Model):
     title = models.CharField(max_length=10)
 
@@ -19,6 +29,7 @@ class Color(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=50)
+    category = models.ManyToManyField(Category, related_name='products')
     description = models.TextField()
     price = models.IntegerField()
     discount = models.SmallIntegerField(null=True, blank=True)

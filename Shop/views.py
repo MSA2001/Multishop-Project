@@ -36,3 +36,10 @@ class ContactView(View):
             return redirect('shop:contact_us')
 
         return render(request, 'Shop/contact.html', {'form': form})
+
+
+class ShopView(View):
+
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, 'Shop/shop.html', {'products': products})
