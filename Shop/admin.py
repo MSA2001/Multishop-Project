@@ -13,8 +13,13 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = (InformationAdmin,)
 
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'parent')
+    prepopulated_fields = {'slug': ('name',)}
+
+
 admin.site.register(Size)
 admin.site.register(Color)
-admin.site.register(Category)
 admin.site.register(Contact)
 

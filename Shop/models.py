@@ -4,7 +4,9 @@ from django.db import models
 
 
 class Category(models.Model):
+    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='subs')
     name = models.CharField(max_length=100)
+    slug = models.SlugField()
 
     class Meta:
         verbose_name_plural = "categories"
