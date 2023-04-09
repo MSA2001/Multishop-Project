@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from .forms import ContactForm
-from Shop.models import Product, Contact
+from Shop.models import Product, Contact, Category
 
 
 def home(request):
@@ -58,3 +58,12 @@ class SearchView(View):
         q = request.GET.get('q')
         products = Product.objects.filter(title__icontains=q)
         return render(request, 'Shop/shop.html', {'products': products})
+
+
+class NavbarPartialView(TemplateView):
+    template_name = 'includes/navbar.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(NavbarPartialView, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        return context

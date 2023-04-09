@@ -11,4 +11,5 @@ urlpatterns = [
     path('shop/', views.ShopView.as_view(), name='shop'),
     path('category/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
     path('search/', views.SearchView.as_view(), name='search'),
+    path('navbar/', views.NavbarPartialView.as_view(), name='navbar'),
 ]
